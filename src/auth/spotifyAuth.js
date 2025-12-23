@@ -8,13 +8,20 @@ const SCOPES = [
   "user-read-private",
   "user-read-email",
   "playlist-read-private",
+  "streaming",
+  "user-read-playback-state",
+  "user-modify-playback-state",
 ].join(" ");
 
 export async function loginWithSpotify() {
-  const codeVerifier = generateCodeVerifier();
-  const codeChallenge = await generateCodeChallenge(codeVerifier);
+  let codeVerifier = localStorage.getItem("code_verifier");
 
-  localStorage.setItem("code_verifier", codeVerifier);
+  if (!codeVerifier) {
+    codeVerifier = generateCodeVerifier();
+    localStorage.setItem("code_verifier", codeVerifier);
+  }
+
+  const codeChallenge = await generateCodeChallenge(codeVerifier);
 
   const params = new URLSearchParams({
     response_type: "code",
