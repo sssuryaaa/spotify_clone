@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setDeviceId } from "../utils/deviceId";
 
 export default function useSpotifyPlayer(token) {
   const [player, setPlayer] = useState(null);
-  const [deviceId, setDeviceId] = useState(null);
+  const [deviceId, setLocalDeviceId] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!token) return;
@@ -22,7 +25,8 @@ export default function useSpotifyPlayer(token) {
 
       player.addListener("ready", ({ device_id }) => {
         console.log("Spotify Device Ready:", device_id);
-        setDeviceId(device_id);
+        setLocalDeviceId(device_id);
+        dispatch(setDeviceId(device_id));
       });
 
       player.addListener("not_ready", ({ device_id }) => {

@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { GoDotFill } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { addPlaylist } from "../utils/PlaylistSlice";
 import { Link } from "react-router-dom";
+import { activatePlaylist } from "../utils/activePlayist";
 
 const LeftBar = () => {
   const { data, loading, error } = useFetch(
     "https://api.spotify.com/v1/me/playlists"
   );
+  const activePlaylist = useSelector((store) => store.activePlaylist);
   const slice = useSelector((store) => store.playlist.items);
   const dispatch = useDispatch();
 
@@ -30,7 +32,12 @@ const LeftBar = () => {
         {playlists.map((playlist) => {
           return (
             <Link key={playlist.id} to={"/playlist/" + playlist.id}>
-              <div className="flex gap-2 cursor-pointer hover:bg-gray-600 p-2 rounded-sm">
+              <div
+                className={`flex gap-2 cursor-pointer ${
+                  activePlaylist === playlist.id ? "bg-gray-600" : ""
+                } hover:bg-gray-600 p-2 rounded-sm`}
+                onClick={() => dispatch(activatePlaylist(playlist.id))}
+              >
                 <div>
                   <img src={playlist.images[0].url} className="h-12 w-12" />
                 </div>

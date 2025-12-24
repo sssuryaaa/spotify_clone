@@ -1,17 +1,21 @@
 import Header from "./components/Header";
 import Body from "./components/Body";
-import { Provider } from "react-redux";
-import appStore from "./utils/appStore";
 import PlayerBar from "./components/PlayerBar";
+import { useDispatch } from "react-redux";
+import { deFocus } from "./utils/FocusTrack";
 
 export default function App() {
+  const dispatch = useDispatch();
   return (
-    <Provider store={appStore}>
-      <div className="h-dvh bg-black text-white">
-        <Header />
-        <Body />
-        <PlayerBar />
-      </div>
-    </Provider>
+    <div
+      onClick={() => {
+        dispatch(deFocus());
+      }}
+      className="h-dvh bg-black text-white"
+    >
+      <Header />
+      <Body />
+      <PlayerBar />
+    </div>
   );
 }

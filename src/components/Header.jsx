@@ -1,9 +1,14 @@
 import React from "react";
 import LoginButton from "./LoginButton";
 import { FaRegUserCircle } from "react-icons/fa";
+import { MdHomeFilled } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { noActivePlaylist } from "../utils/activePlayist";
 
 const Header = () => {
   const token = localStorage.getItem("access_token");
+  const dispatch = useDispatch();
   return (
     <div>
       {!token ? (
@@ -16,7 +21,15 @@ const Header = () => {
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png"
             />
           </div>
-          <div>
+          <div className="flex items-center gap-1">
+            <Link to="/">
+              <div
+                className="rounded-full bg-gray-800 p-2"
+                onClick={() => dispatch(noActivePlaylist())}
+              >
+                <MdHomeFilled size={30} />
+              </div>
+            </Link>
             <input
               className="w-lg p-3 bg-gray-800 rounded-full"
               type="text"
