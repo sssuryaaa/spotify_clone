@@ -1,8 +1,8 @@
 import Header from "./components/Header";
 import Body from "./components/Body";
-import PlayerBar from "./components/PlayerBar";
 import { useDispatch } from "react-redux";
-import { deFocus } from "./utils/FocusTrack";
+import { deFocus } from "./utils/focusTrack";
+import Footer from "./components/Footer";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export default function App() {
     >
       <Header />
       <Body />
-      <PlayerBar />
+      <Footer />
     </div>
   );
 }
