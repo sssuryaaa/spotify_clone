@@ -6,6 +6,7 @@ import deviceId from "./deviceId";
 import currentPlayingTrack from "./currentPlayingTrack";
 import superFocussedTrack from "./superFocussedTrack";
 import sftInfo from "./sftInfo";
+import playback from "./playback";
 
 const appStore = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const appStore = configureStore({
     currentPlayingTrack: currentPlayingTrack,
     superFocussedTrack: superFocussedTrack,
     sftInfo: sftInfo,
+    playback: playback,
   },
 });
 

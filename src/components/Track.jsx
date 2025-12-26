@@ -6,7 +6,7 @@ import { FaPlay, FaPause } from "react-icons/fa";
 import useSpotifyControls from "../hooks/useSpotifyControls";
 
 const Track = ({ tr, contextUri, index }) => {
-  const { playTrack, pausePlayback } = useSpotifyControls();
+  const { playTrack, pausePlayback, resumePlayback } = useSpotifyControls();
   const [playIconIndex, setPlayIconIndex] = useState(null);
   const focusTrack = useSelector((store) => store.focusTrack);
   const dispatch = useDispatch();
@@ -39,8 +39,9 @@ const Track = ({ tr, contextUri, index }) => {
           }`}
           onClick={() => {
             if (currentPlayingTrack === tr.track.id) pausePlayback();
+            else if (superFocussedTrack === tr.track.id)
+              resumePlayback(tr.track.id);
             else playTrack(tr.track.uri, contextUri, tr.track.id);
-            console.log("clicked");
           }}
         >
           {playIconIndex === index ? (

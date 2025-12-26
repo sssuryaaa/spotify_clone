@@ -5,13 +5,14 @@ import { FaPause } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { addCurrentPlayingTrack } from "../utils/currentPlayingTrack";
 import useSpotifyControls from "../hooks/useSpotifyControls";
+import SeekBar from "./SeekBar";
 
 const FooterControls = () => {
   const superFocussedTrack = useSelector((store) => store.superFocussedTrack);
   const currentPlayingTrack = useSelector((store) => store.currentPlayingTrack);
   const dispatch = useDispatch();
   const sftInfo = useSelector((store) => store.sftInfo);
-  const { playTrack, pausePlayback } = useSpotifyControls();
+  const { playTrack, pausePlayback, resumePlayback } = useSpotifyControls();
 
   return (
     <div className="w-6/12 text-center">
@@ -25,13 +26,18 @@ const FooterControls = () => {
               pausePlayback();
             } else {
               dispatch(addCurrentPlayingTrack(superFocussedTrack));
-              playTrack(sftInfo.uri, sftInfo.album.uri, sftInfo.id);
+              resumePlayback(sftInfo.uri, sftInfo.album.uri, sftInfo.id);
             }
           }}
         >
           {currentPlayingTrack ? <FaPause /> : <FaPlay />}
         </div>
         <MdSkipNext size={30} />
+      </div>
+      <div>
+        <div>
+          <SeekBar />
+        </div>
       </div>
     </div>
   );

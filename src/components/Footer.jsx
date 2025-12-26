@@ -11,7 +11,6 @@ const token = localStorage.getItem("access_token");
 
 const Footer = () => {
   const dispatch = useDispatch();
-  const { player, deviceId } = useSpotifyPlayer(token);
   const superFocussedTrack = useSelector((store) => store.superFocussedTrack);
   const { data, loading, error } = useFetch(
     "https://api.spotify.com/v1/tracks/" + superFocussedTrack

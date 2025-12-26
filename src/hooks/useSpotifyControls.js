@@ -1,12 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addCurrentPlayingTrack } from "../utils/currentPlayingTrack";
 import { addSuperFocussedTrack } from "../utils/superFocussedTrack";
+import { useContext } from "react";
+import playerContext from "../utils/playerContext";
 
 export default function useSpotifyControls() {
   //   const token = useSelector((store) => store.token);
   const token = localStorage.getItem("access_token");
   const deviceId = useSelector((store) => store.deviceId);
   const dispatch = useDispatch();
+  const { player } = useContext(playerContext);
 
   const playTrack = async (trackUri, contextUri, trackId) => {
     if (!token || !deviceId) return;
@@ -65,5 +68,11 @@ export default function useSpotifyControls() {
     }
   };
 
-  return { playTrack, pausePlayback };
+  const resumePlayback = (trackId) => {
+    if (!player) return;
+    player.resume();
+    dispatch(addCurrentPlayingTrack(trackId));
+  };
+
+  return { playTrack, pausePlayback, resumePlayback };
 }
