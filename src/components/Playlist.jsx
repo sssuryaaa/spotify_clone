@@ -26,7 +26,7 @@ const Playlist = () => {
   console.log(data);
 
   return (
-    <div className="w-200 bg-gray-800 p-5 rounded-sm overflow-scroll ">
+    <div className="w-200 bg-gray-800 p-5 rounded-sm overflow-y-scroll no-scrollbar">
       <div className="border border-t-0 border-l-0 border-r-0 flex justify-between p-2 border-b-gray-600 mb-2">
         <div className="w-5/12"># Title</div>
         <div className="w-3/12">Album</div>

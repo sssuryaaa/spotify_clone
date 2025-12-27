@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+.no-scrollbar {
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Edge */
+}

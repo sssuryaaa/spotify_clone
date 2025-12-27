@@ -11,36 +11,30 @@ const Header = () => {
   const dispatch = useDispatch();
   return (
     <div>
-      {!token ? (
-        <LoginButton />
-      ) : (
-        <div className="flex justify-between py-2 px-5">
-          <div>
-            <img
-              className="w-7 h-7"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png"
-            />
-          </div>
-          <div className="flex items-center gap-1">
-            <Link to="/">
-              <div
-                className="rounded-full bg-gray-800 p-2"
-                onClick={() => dispatch(noActivePlaylist())}
-              >
-                <MdHomeFilled size={30} />
-              </div>
-            </Link>
-            <input
-              className="w-lg p-3 bg-gray-800 rounded-full"
-              type="text"
-              placeholder="What do you want to play?"
-            />
-          </div>
-          <div>
-            <FaRegUserCircle size={30} />
-          </div>
+      <div className="flex justify-between py-2 px-5">
+        <div>
+          <img
+            className="w-7 h-7"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png"
+          />
         </div>
-      )}
+        <div className="flex items-center gap-1">
+          <Link to="/">
+            <div
+              className="rounded-full bg-gray-800 p-2"
+              onClick={() => dispatch(noActivePlaylist())}
+            >
+              <MdHomeFilled size={30} />
+            </div>
+          </Link>
+          <input
+            className="w-lg p-3 bg-gray-800 rounded-full"
+            type="text"
+            placeholder="What do you want to play?"
+          />
+        </div>
+        <div>{!token ? <LoginButton /> : <FaRegUserCircle size={30} />}</div>
+      </div>
     </div>
   );
 };

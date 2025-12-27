@@ -56,7 +56,7 @@ const SeekBar = () => {
 
   return (
     <div>
-      <span>{msToMinSec(position)}</span>
+      <span>{msToMinSec(localPosition)}</span>
       <input
         type="range"
         min={0}
