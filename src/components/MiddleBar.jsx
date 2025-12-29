@@ -1,14 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const MiddleBar = () => {
-  const token = localStorage.getItem("access_token");
-  return (
-    <div
-      className={`${token ? "min-w-200" : "w-300"} bg-gray-800 p-5 rounded-sm`}
-    >
-      MiddleBar
-    </div>
-  );
+  console.log(superFocussedTrack);
+  return <div className={`w-200 bg-gray-800 p-5 rounded-sm`}>MiddleBar</div>;
 };
 
 export default MiddleBar;
