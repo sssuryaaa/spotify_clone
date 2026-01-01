@@ -10,6 +10,7 @@ import {
 } from "../utils/playback";
 import { addCurrentPlayingTrack } from "../utils/currentPlayingTrack";
 import { addSuperFocussedTrack } from "../utils/superFocussedTrack";
+import { addCurrentPlayingPlaylistUri } from "../utils/currentPlayingPlaylistUri";
 
 const token = localStorage.getItem("access_token");
 
@@ -22,6 +23,7 @@ const SpotifyPlayerProvider = ({ children }) => {
         if (!state) return;
 
         const currentTrack = state.track_window.current_track;
+        const contextUri = state.context?.uri || null;
 
         dispatch(setIsPlaying(!state.paused));
         dispatch(setPosition(state.position));
@@ -30,6 +32,7 @@ const SpotifyPlayerProvider = ({ children }) => {
         if (state.paused) dispatch(addCurrentPlayingTrack(null));
         else dispatch(addCurrentPlayingTrack(currentTrack.id));
         dispatch(addSuperFocussedTrack(currentTrack.id));
+        dispatch(addCurrentPlayingPlaylistUri(contextUri));
       });
     }
   }, [player, dispatch]);

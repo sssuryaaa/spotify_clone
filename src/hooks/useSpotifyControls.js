@@ -40,6 +40,7 @@ export default function useSpotifyControls() {
       }
       dispatch(addCurrentPlayingTrack(trackId));
       dispatch(addSuperFocussedTrack(trackId));
+      localStorage.setItem("sftTrack", trackId);
     } catch (err) {
       console.log(err.message);
     }

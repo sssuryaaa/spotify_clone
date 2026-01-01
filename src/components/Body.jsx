@@ -12,7 +12,7 @@ const Body = () => {
       <div
         className={`${
           token && superFocussedTrack ? "w-200 " : "w-300"
-        } overflow-y-scroll no-scrollbar rounded-sm`}
+        } overflow-y-scroll no-scrollbar rounded-sm h-full bg-gray-800`}
       >
         <Outlet />
       </div>

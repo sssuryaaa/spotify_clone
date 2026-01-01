@@ -55,9 +55,10 @@ const SeekBar = () => {
   const val = duration ? Math.floor((localPosition / duration) * 100) : 0;
 
   return (
-    <div>
+    <div className="flex items-center justify-center gap-2">
       <span>{msToMinSec(localPosition)}</span>
       <input
+        className="w-2/4 p-5 h-1.5"
         type="range"
         min={0}
         max={100}

@@ -22,11 +22,9 @@ const FooterControls = () => {
           className="bg-white text-black p-3 rounded-full"
           onClick={() => {
             if (currentPlayingTrack) {
-              dispatch(addCurrentPlayingTrack(null));
               pausePlayback();
             } else {
-              dispatch(addCurrentPlayingTrack(superFocussedTrack));
-              resumePlayback(sftInfo.uri, sftInfo.album.uri, sftInfo.id);
+              resumePlayback(sftInfo.id);
             }
           }}
         >

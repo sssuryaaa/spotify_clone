@@ -6,6 +6,7 @@ import { addSftInfo } from "../utils/sftInfo";
 import FooterTrackCard from "./FooterTrackCard";
 import FooterControls from "./FooterControls";
 import FooterQueue from "./FooterQueue";
+import { addSuperFocussedTrack } from "../utils/superFocussedTrack";
 
 const token = localStorage.getItem("access_token");
 

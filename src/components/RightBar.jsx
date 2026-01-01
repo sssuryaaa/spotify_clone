@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const RightBar = () => {
   const sftInfo = useSelector((store) => store.sftInfo);
-  console.log(sftInfo);
   if (!sftInfo)
     return (
       <div className="w-100 bg-gray-800 p-5 rounded-sm">

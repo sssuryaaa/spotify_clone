@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 const FooterTrackCard = () => {
   const sftInfo = useSelector((store) => store.sftInfo);
-  console.log(sftInfo);
   return (
     <div className="flex items-center gap-4 w-3/12">
       <div>

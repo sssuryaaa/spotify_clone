@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { setDeviceId } from "../utils/deviceId";
 
 export default function useSpotifyPlayer(token) {
-  const playerRef = useRef(null); // ✅ ref, not state
+  const playerRef = useRef(null);
   const [ready, setReady] = useState(false);
   const dispatch = useDispatch();
 

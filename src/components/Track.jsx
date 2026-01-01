@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { FaPlay, FaPause } from "react-icons/fa";
 import useSpotifyControls from "../hooks/useSpotifyControls";
 
-const Track = ({ tr, contextUri, index }) => {
+const Track = ({ tr, contextUri, index, added_at }) => {
   const { playTrack, pausePlayback, resumePlayback } = useSpotifyControls();
   const [playIconIndex, setPlayIconIndex] = useState(null);
   const focusTrack = useSelector((store) => store.focusTrack);
@@ -22,11 +22,11 @@ const Track = ({ tr, contextUri, index }) => {
   return (
     <div
       className={`${
-        focusTrack === tr.track.id ? "bg-gray-600" : ""
+        focusTrack === tr.id ? "bg-gray-600" : ""
       } flex justify-between shrink-0 p-2 items-center hover:bg-gray-600 cursor-pointer rounded-sm`}
-      key={tr.track.id}
+      key={tr.id}
       onClick={(e) => {
-        dispatch(focus(tr.track.id));
+        dispatch(focus(tr.id));
         e.stopPropagation();
       }}
       onMouseEnter={() => setPlayIconIndex(index)}
@@ -34,18 +34,15 @@ const Track = ({ tr, contextUri, index }) => {
     >
       <div className="w-5/12 flex gap-3 items-center ">
         <div
-          className={`${
-            superFocussedTrack === tr.track.id ? "text-green-400" : ""
-          }`}
+          className={`${superFocussedTrack === tr.id ? "text-green-400" : ""} `}
           onClick={() => {
-            if (currentPlayingTrack === tr.track.id) pausePlayback();
-            else if (superFocussedTrack === tr.track.id)
-              resumePlayback(tr.track.id);
-            else playTrack(tr.track.uri, contextUri, tr.track.id);
+            if (currentPlayingTrack === tr.id) pausePlayback();
+            else if (superFocussedTrack === tr.id) resumePlayback(tr.id);
+            else playTrack(tr.uri, contextUri, tr.id);
           }}
         >
           {playIconIndex === index ? (
-            currentPlayingTrack === tr.track.id ? (
+            currentPlayingTrack === tr.id ? (
               <FaPause size={9} />
             ) : (
               <FaPlay size={9} />
@@ -57,29 +54,26 @@ const Track = ({ tr, contextUri, index }) => {
         <div>
           <img
             className="h-12 w-12 rounded-sm"
-            src={tr.track.album.images[2].url}
+            src={tr.album.images[2].url}
             alt=""
           />{" "}
         </div>
         <div className="w-8/12 h-12 overflow-hidden">
           <div
             className={`${
-              superFocussedTrack === tr.track.id ? "text-green-400" : ""
+              superFocussedTrack === tr.id ? "text-green-400" : ""
             }`}
           >
-            {tr.track.name}
+            {tr.name}
           </div>
-          <div>{tr.track.artists.map((artist) => artist.name).join(", ")}</div>
+          <div>{tr.artists.map((artist) => artist.name).join(", ")}</div>
         </div>
       </div>
-      <Link
-        className="w-3/12 h-5 overflow-hidden"
-        to={"/album/" + tr.track.album.id}
-      >
-        <div>{tr.track.album.name}</div>
+      <Link className="w-3/12 h-5 overflow-hidden" to={"/album/" + tr.album.id}>
+        <div>{tr.album.name}</div>
       </Link>
-      <div className="w-2/12">{tr.added_at.split("T")[0]}</div>
-      <div className="w-2/12">{msToMinSec(tr.track.duration_ms)}</div>
+      {added_at && <div className="w-2/12">{added_at.split("T")[0]}</div>}
+      <div className="w-2/12">{msToMinSec(tr.duration_ms)}</div>
     </div>
   );
 };

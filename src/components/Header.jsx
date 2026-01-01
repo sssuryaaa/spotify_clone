@@ -2,13 +2,14 @@ import React from "react";
 import LoginButton from "./LoginButton";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdHomeFilled } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { noActivePlaylist } from "../utils/activePlayist";
 
 const Header = () => {
   const token = localStorage.getItem("access_token");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <div>
       <div className="flex justify-between py-2 px-5">
@@ -31,6 +32,7 @@ const Header = () => {
             className="w-lg p-3 bg-gray-800 rounded-full"
             type="text"
             placeholder="What do you want to play?"
+            onChange={(e) => navigate("/search/" + e.target.value)}
           />
         </div>
         <div>{!token ? <LoginButton /> : <FaRegUserCircle size={30} />}</div>

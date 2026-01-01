@@ -23,7 +23,6 @@ const Playlist = () => {
 
   const tracks = data.tracks.items;
   const playlstUri = data.uri;
-  console.log(data);
 
   return (
     <div className=" bg-gray-800 p-5">
@@ -37,7 +36,8 @@ const Playlist = () => {
         return (
           <Track
             key={tr.track.id}
-            tr={tr}
+            tr={tr.track}
+            added_at={tr.added_at}
             contextUri={playlstUri}
             index={index}
           />

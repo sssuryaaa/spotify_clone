@@ -12,6 +12,9 @@ const LeftBar = () => {
   );
   const activePlaylist = useSelector((store) => store.activePlaylist);
   const slice = useSelector((store) => store.playlist.items);
+  const currentPlayingPlaylistUri = useSelector(
+    (store) => store.currentPlayingPlaylistUri
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,7 +45,13 @@ const LeftBar = () => {
                   <img src={playlist.images[0].url} className="h-12 w-12" />
                 </div>
                 <div className="w-8/12">
-                  <div className="h-6 overflow-hidden text-green-500">
+                  <div
+                    className={`h-6 overflow-hidden ${
+                      currentPlayingPlaylistUri === playlist.uri
+                        ? "text-green-400"
+                        : ""
+                    } `}
+                  >
                     {playlist.name}
                   </div>
                   <div className="flex items-center gap-1 text-gray-400 ">
