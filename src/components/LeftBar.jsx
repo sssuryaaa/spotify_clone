@@ -21,12 +21,13 @@ const LeftBar = () => {
     if (data) dispatch(addPlaylist(data));
   }, [data]);
 
-  if (loading || slice.length === 0)
+  // if (loading || slice.length === 0)
+  if (loading)
     return <h1 className="w-100 bg-gray-800 p-5 rounded-sm">Loading...</h1>;
   if (error)
     return <h1 className="w-100 bg-gray-800 p-5 rounded-sm">{error}</h1>;
 
-  const playlists = slice[0].items;
+  const playlists = slice[0]?.items || [];
 
   return (
     <div className="w-100 bg-gray-800 p-5 rounded-sm">

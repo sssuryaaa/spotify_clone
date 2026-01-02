@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 import { getAccessToken } from "../auth/token";
 
 export default function Callback() {
@@ -10,7 +10,7 @@ export default function Callback() {
     const code = params.get("code");
 
     if (code) {
-      getAccessToken(code).then(() => {
+      getAccessToken(code).then((data) => {
         navigate("/");
       });
     }

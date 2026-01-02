@@ -38,7 +38,9 @@ const Track = ({ tr, contextUri, index, added_at }) => {
           onClick={() => {
             if (currentPlayingTrack === tr.id) pausePlayback();
             else if (superFocussedTrack === tr.id) resumePlayback(tr.id);
-            else playTrack(tr.uri, contextUri, tr.id);
+            else {
+              playTrack(tr.uri, contextUri, tr.id);
+            }
           }}
         >
           {playIconIndex === index ? (

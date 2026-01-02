@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { OPTIONS } from "../utils/constants";
+import { getOptions } from "../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 const useFetch = (url) => {
+  const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,8 +15,12 @@ const useFetch = (url) => {
 
   const fetchData = async () => {
     try {
-      const res = await fetch(url, OPTIONS);
+      const res = await fetch(url, getOptions());
       if (!res.ok) {
+        // if (res.status === 401) {
+        //   localStorage.clear();
+        //   navigate("/");
+        // }
         throw new Error("Error Occured: " + res.status);
       }
       const json = await res.json();

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useSpotifyPlayer from "../hooks/useSpotifyPlayer";
 import playerContext from "../utils/playerContext";
 import { useDispatch } from "react-redux";
@@ -11,12 +11,18 @@ import {
 import { addCurrentPlayingTrack } from "../utils/currentPlayingTrack";
 import { addSuperFocussedTrack } from "../utils/superFocussedTrack";
 import { addCurrentPlayingPlaylistUri } from "../utils/currentPlayingPlaylistUri";
-
-const token = localStorage.getItem("access_token");
+import { getToken } from "../utils/constants";
 
 const SpotifyPlayerProvider = ({ children }) => {
+  const [token, setToken] = useState(null);
   const { player } = useSpotifyPlayer(token);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const accessToken = getToken();
+    setToken(accessToken);
+  }, []);
+
   useEffect(() => {
     if (player) {
       player.addListener("player_state_changed", (state) => {
