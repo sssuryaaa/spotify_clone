@@ -14,14 +14,8 @@ import { addCurrentPlayingPlaylistUri } from "../utils/currentPlayingPlaylistUri
 import { getToken } from "../utils/constants";
 
 const SpotifyPlayerProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
-  const { player } = useSpotifyPlayer(token);
+  const { player } = useSpotifyPlayer(getToken());
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const accessToken = getToken();
-    setToken(accessToken);
-  }, []);
 
   useEffect(() => {
     if (player) {

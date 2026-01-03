@@ -3,10 +3,11 @@ import { addCurrentPlayingTrack } from "../utils/currentPlayingTrack";
 import { addSuperFocussedTrack } from "../utils/superFocussedTrack";
 import { useContext } from "react";
 import playerContext from "../utils/playerContext";
+import { getToken } from "../utils/constants";
 
 export default function useSpotifyControls() {
   //   const token = useSelector((store) => store.token);
-  const token = localStorage.getItem("access_token");
+  const token = getToken();
   const deviceId = useSelector((store) => store.deviceId);
   const dispatch = useDispatch();
   const { player } = useContext(playerContext);
